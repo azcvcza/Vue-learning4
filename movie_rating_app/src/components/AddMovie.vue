@@ -9,6 +9,7 @@
 	</v-form>
 </template>
 <script>
+import axios from 'axios';
 export default {
 	data:()=>({
 		valid:true,
@@ -25,8 +26,26 @@ export default {
 	methods:{
 		submit(){
 			if(this.$ref.form.validate()){
-				console.log("hello eubmit");
+			return axios({
+				method:'post',
+				data:{
+					name:this.name,
+					description:this.description,
+					release_year:this.release_year,
+					genre:this.genre,
+				},
+				url:'http://localhost:8081',
+				headers:{
+					'Content-Type':'application/json',
+				}
+			}).then(()=>{
+				this.$router.push({name:'Home'});
+				this.$refs.form.reset();
+			}).catch((e)=>{
+				console.log("error in addmovie submit:",error);
+			})
 			}
+			return true;
 		},
 		clear(){
 			this.$ref.form.reset();

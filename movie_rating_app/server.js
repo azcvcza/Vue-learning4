@@ -17,6 +17,13 @@ mongoose.connect('mongodb://localhost/movie_rating_app', function() {
     console.err("App starting err:", err.stack);
     process.exit(1);
 })
+fs.readdirSync('controllers').forEach(function(file) {
+    if (file.substr(-3) == ".js") {
+        const route = require("./controllers/" + file);
+        route.controller(app);
+    }
+
+})
 router.get('/', function(req, res) {
     res.json({
         message: 'API INIT'
