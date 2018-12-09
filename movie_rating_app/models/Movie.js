@@ -7,5 +7,5 @@ const MovieSchema = new Schema({
     release_year: Number,
     genre: String,
 })
-const Movie = mongoose.model('Movie');
+const Movie = mongoose.model('Movie', MovieSchema);
 module.exports = Movie;

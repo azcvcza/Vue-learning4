@@ -25,7 +25,7 @@
   <v-toolbar-title>Home</v-toolbar-title>
   <v-spacer></v-spacer>
   <v-toolbar-items class="hiddem-sm-and-down">
-    <v-btn flat v-bind:to="{name:AddMovie}">AddMovie</v-btn>
+    <v-btn flat v-bind:to="{name:'AddMovie'}">AddMovie</v-btn>
   </v-toolbar-items>
 </v-toolbar>
 <v-content>
