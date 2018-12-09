@@ -12,25 +12,26 @@ app.use(bodyParser.json());
 app.use(cors());
 
 mongoose.connect('mongodb://localhost/movie_rating_app', function() {
-        console.log("db connected");
-    }).catch(err => {
-        console.err("App starting err:", err.stack);
-        process.exit(1);
-    })
-    /*
-    fs.readdirSync('controllers').forEach(function(file) {
-        if (file.substr(-3) == ".js") {
-            const route = require("./controllers/" + file);
-            route.controller(app);
-        }
-
-    })
-    */
-router.get('/', function(req, res) {
-    res.json({
-        message: 'API INIT'
-    })
+    console.log("db connected");
+}).catch(err => {
+    console.err("App starting err:", err.stack);
+    process.exit(1);
 })
+
+fs.readdirSync('controllers').forEach(function(file) {
+    if (file.substr(-3) == ".js") {
+        const route = require("./controllers/" + file);
+        route.controller(app);
+    }
+
+})
+
+router.get('/', function(req, res) {
+        res.json({
+            message: 'API INIT'
+        })
+    })
+    //before dealing with message
 const port = process.env.API_PORT || 8081;
 app.use('/', router);
 app.listen(port, function() {
