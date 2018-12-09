@@ -25,7 +25,8 @@ export default {
 	}),
 	methods:{
 		submit(){
-			if(this.$ref.form.validate()){
+			
+			if(this.$refs.form.validate()){
 			return axios({
 				method:'post',
 				data:{
@@ -48,7 +49,7 @@ export default {
 			return true;
 		},
 		clear(){
-			this.$ref.form.reset();
+			this.$refs.form.reset();
 		}
 	}
 
