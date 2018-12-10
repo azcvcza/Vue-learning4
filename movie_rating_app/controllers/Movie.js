@@ -15,5 +15,15 @@ module.exports.controller = (app) => {
             res.send(movie);
         })
     });
+    app.get('/movies', (req, res) => {
+        MovieSchema.find({}, "name description release_year genre", (error, movies) => {
+            if (error) {
+                console.log("in controller get movie,error:", error);
+            }
+            res.send({
+                movies,
+            })
+        })
+    })
 
 }
