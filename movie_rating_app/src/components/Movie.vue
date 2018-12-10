@@ -8,7 +8,9 @@
 							{{movie.name}}
 						</div>
 						<span class="grey--text">{{movie.release_year}}*{{movie.genre}}</span>
+						
 					</div>
+					<span class="yellow--text">Rating:::>{{rate}}</span>
 				</v-card-title>
 			
 				<v-btn class="card-title"  primary @click="rate">Rate the Movie</v-btn>
@@ -45,6 +47,7 @@
 		data(){
 			return{
 				movie:[],
+				rates:0,
 			}
 		},
 		mounted(){
@@ -87,7 +90,8 @@
 					})
 					.then(()=>{
 						this.$swal(`Thank you for rating! ${state.note}`,'success')
-						this.$router.push({name:'Home'});
+				
+						
 					})
 					.catch((error)=>{
 						const message = error.response.data.message;
