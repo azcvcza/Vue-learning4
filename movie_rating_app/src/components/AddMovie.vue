@@ -35,7 +35,7 @@ export default {
 					release_year:this.release_year,
 					genre:this.genre,
 				},
-				url:'http://localhost:8081',
+				url:'http://localhost:8081/movies',
 				headers:{
 					'Content-Type':'application/json',
 				}
@@ -43,7 +43,7 @@ export default {
 				this.$router.push({name:'Home'});
 				this.$refs.form.reset();
 			}).catch((e)=>{
-				console.log("error in addmovie submit:",error);
+				console.log("error in addmovie submit:",e);
 			})
 			}
 			return true;

@@ -8,11 +8,12 @@ module.exports.controller = (app) => {
             release_year: req.body.release_year,
             genre: req.body.genre,
         })
+        newMovie.save((error, movie) => {
+            if (error) {
+                console.log("in controller log error:", error);
+            }
+            res.send(movie);
+        })
     });
-    newMovie.save((error, movie) => {
-        if (error) {
-            console.log("in controller log error:", error);
-        }
-        res.send(movie);
-    })
+
 }
