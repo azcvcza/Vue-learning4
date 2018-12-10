@@ -35,7 +35,7 @@
 					url:`http://localhost:8081/api/movies/${this.$route.params.id}`,
 				})
 				.then((response)=>{
-					console.log("in Movie.vue",response.data)
+					console.log("in Movie.vue",response)
 					this.movie = response.data;
 				})
 				.catch((e)=>{

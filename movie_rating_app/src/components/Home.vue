@@ -16,10 +16,9 @@
 				<v-card-title primary-title>
 					<div>
 						<div class="headline">
-							<v-btn flat v-bind:to="`/movies/${movie._id}`">{{movie.name}}</v-btn>
-              	<span class="grey--text">{{movie.release_year}}*{{movie.genre}}</span>
+							<v-btn flat v-bind:to="`/movies/${movie._id}`"><h2>{{movie.name}}</h2></v-btn>
 						</div>
-					
+						<span class="grey--text">{{movie.release_year}}*{{movie.genre}}</span>
 					</div>
 				</v-card-title>
 				<v-card-text>{{movie.description}}</v-card-text>
