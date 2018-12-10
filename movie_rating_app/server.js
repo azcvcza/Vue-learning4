@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const fs = require('fs');
-
+//console.log("cors required", cors);
 const app = express();
 const router = express.Router();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
-
+//console.log("use finished");
 mongoose.connect('mongodb://localhost/movie_rating_app', function() {
     console.log("db connected");
 }).catch(err => {
@@ -35,5 +35,5 @@ router.get('/', function(req, res) {
 const port = process.env.API_PORT || 8081;
 app.use('/', router);
 app.listen(port, function() {
-    console.log('api running on port ${port}')
+    console.log('api running on port ${port}', port)
 })
