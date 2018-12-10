@@ -1,5 +1,5 @@
 const MovieSchema = require('../models/Movie.js');
-
+const Rating = require('../models/Rating.js')
 module.exports.controller = (app) => {
     app.post('/movies', (req, res) => {
         const newMovie = new MovieSchema({
@@ -15,6 +15,7 @@ module.exports.controller = (app) => {
             res.send(movie);
         })
     });
+    //get all movies
     app.get('/movies', (req, res) => {
         MovieSchema.find({}, "name description release_year genre", (error, movies) => {
             if (error) {
@@ -25,13 +26,30 @@ module.exports.controller = (app) => {
             })
         })
     });
+    //get single movie by id
     app.get('/api/movies/:id', (req, res) => {
-        MovieSchema.findById(req.params.id, 'name description release_year genre', (error, movie) => {
-            if (error) {
-                console.error(error);
-            }
-            //console.log("success get id,movie:", movie, res);
-            res.send(movie);
+            MovieSchema.findById(req.params.id, 'name description release_year genre', (error, movie) => {
+                if (error) {
+                    console.error(error);
+                }
+                //console.log("success get id,movie:", movie, res);
+                res.send(movie);
+            })
+        })
+        //rating marks 
+    app.post('/movies/rate/:id', (req, res) => {
+        const rating = new Rating({
+            movie_id: req.params.id,
+            user_id: req.body.user_id,
+            rate: req.body.rate,
+        })
+        rating.save(function(error, rating) {
+            if (error) { console.log("in contrller movie.js,rating err:", error) }
+            res.send({
+                movie_id: rating.movie_id,
+                user_id: rating.user_id,
+                rate: rating.rate
+            })
         })
     })
 

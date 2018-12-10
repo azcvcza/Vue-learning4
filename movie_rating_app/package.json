@@ -78,6 +78,7 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
+    "vue-star-rating": "^1.6.1",
     "vue-style-loader": "^3.0.1",
     "vue-swal": "^1.0.0",
     "vue-template-compiler": "^2.5.2",

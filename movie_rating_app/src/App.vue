@@ -2,6 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" fixed app>
     <v-list dense>
+      
       <router-link v-bind:to="{name:'Home'}" class="side_bar_link">
         <v-list-tile>
           <v-list-tile-action>
