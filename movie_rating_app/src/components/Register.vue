@@ -1,5 +1,6 @@
 <template>
 	<v-form v-model="valid" ref="form" lazy-validation>
+		<h2>Register Page</h2>
 		<v-textarea label="Name" v-model="name" required="required"></v-textarea>
 		<v-textarea label="Email" v-model="email" :rules="emailRules" required="required"></v-textarea>
 		<v-textarea label="Password" v-model="password" required="required"></v-textarea>

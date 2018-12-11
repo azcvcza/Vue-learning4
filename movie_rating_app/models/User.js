@@ -12,7 +12,7 @@ module.exports = User;
 module.exports.createUser = (newUser, callback) => {
     bcryptjs.genSalt(10, (err, salt) => {
         bcryptjs.hash(newUser.password, salt, (error, hash) => {
-            const newUserResource = new User;
+            const newUserResource = newUser;
             newUserResource.password = hash;
             newUserResource.save(callback);
         })
@@ -20,11 +20,14 @@ module.exports.createUser = (newUser, callback) => {
 }
 module.exports.getUserByEmail = (email, callback) => {
     const query = { email };
-    User.findOne(query, callback);
+    console.log("in model user,getUserByEmail,query:", query);
+    var result = User.findOne(query, callback);
+    console.log("in model user,getUserByEmail:", result);
 }
-module.exports.comparePassword = (candidatePasword, hash, callback) => {
-    bcryptjs.compare(candidatePassword, hash, (err, isMatch) => {
+module.exports.comparePassword = (candidatePassword, hash, callback) => {
+    bcryptjs.compare(candidatePassword, hash, (error, isMatch) => {
         if (error) { throw error; }
+        console.log("in model user,comparepassord:", isMatch)
         callback(null, isMatch);
     })
 }
