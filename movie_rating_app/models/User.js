@@ -9,7 +9,7 @@ const UserSchema = new Schema({
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
-module.exports.createUser = (newUser, error) => {
+module.exports.createUser = (newUser, callback) => {
     bcryptjs.genSalt(10, (err, salt) => {
         bcryptjs.hash(newUser.password, salt, (error, hash) => {
             const newUserResource = new User;
