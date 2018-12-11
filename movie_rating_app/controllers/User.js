@@ -30,8 +30,10 @@ module.exports.controller = (app) => {
             const password = req.body.password;
             User.getUserByEmail(email, (err, user) => {
                 if (!user) {
+                    console.log("in controller user,not found");
                     res.status(404).json({ message: 'The user does not exist!' });
                 } else {
+
                     User.comparePassword(password, user.password, (error, isMatch) => {
                         if (error) { throw error }
                         if (isMatch) {
