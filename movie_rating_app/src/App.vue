@@ -30,7 +30,7 @@
     <v-btn flat v-bind:to="{name:'Register'}" v-if="!current_user" id="register_btn">Register</v-btn>
     <v-btn flat v-bind:to="{name:'Login'}" v-if="!current_user" id="login_btn">Login</v-btn>
     <v-btn id="logout_btn" flat="" v-if="current_user" @click="logout">Logout</v-btn>
-    <v-btn flat v-bind:to="{name:'AddMovie'}">AddMovie</v-btn>
+    <v-btn flat v-bind:to="{name:'AddMovie'}" v-if="current_user">AddMovie</v-btn>
   </v-toolbar-items>
 </v-toolbar>
 <v-content>
