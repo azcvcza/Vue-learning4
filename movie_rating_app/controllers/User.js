@@ -6,6 +6,7 @@ const jwtOptions = {};
 jwtOptions.jwtFromRequest = extractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = "thisisthesecretkey";
 module.exports.controller = (app) => {
+
     app.post('/users/register', (req, res) => {
             const name = req.body.name;
             const email = req.body.email;
