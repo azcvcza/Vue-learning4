@@ -1,6 +1,18 @@
 const MovieSchema = require('../models/Movie.js');
 const Rating = require('../models/Rating.js')
 module.exports.controller = (app) => {
+    //get all movies
+    app.get('/movies', (req, res) => {
+        MovieSchema.find({}, "name description release_year genre", (error, movies) => {
+            if (error) {
+                console.log("in controller get movie,error:", error);
+            }
+            res.send({
+                movies,
+            })
+        })
+    });
+    //add a new movie
     app.post('/movies', (req, res) => {
         const newMovie = new MovieSchema({
             name: req.body.name,
@@ -13,17 +25,6 @@ module.exports.controller = (app) => {
                 console.log("in controller log error:", error);
             }
             res.send(movie);
-        })
-    });
-    //get all movies
-    app.get('/movies', (req, res) => {
-        MovieSchema.find({}, "name description release_year genre", (error, movies) => {
-            if (error) {
-                console.log("in controller get movie,error:", error);
-            }
-            res.send({
-                movies,
-            })
         })
     });
     //get single movie by id

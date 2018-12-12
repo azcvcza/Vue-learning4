@@ -14,6 +14,7 @@ const jwtOptions = {};
 jwtOptions.jwtFromRequest = extractJWT.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'movieratingapplicationsecretkey';
 //
+const serveStatic = require('serve-static');
 //console.log("cors required", cors);
 const app = express();
 const router = express.Router();
@@ -36,7 +37,7 @@ fs.readdirSync('controllers').forEach(function(file) {
     }
 
 })
-
+app.use(serveStatic(__dirname + "/dist/"))
 router.get('/', function(req, res) {
         res.json({
             message: 'API INIT'
