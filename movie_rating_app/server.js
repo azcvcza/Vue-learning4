@@ -16,6 +16,10 @@ jwtOptions.secretOrKey = 'movieratingapplicationsecretkey';
 //
 const serveStatic = require('serve-static');
 //
+const express_session = require('express-session');
+//
+const config = require("./config/Config")
+    //
 const history = require('connect-history-api-fallback');
 //console.log("cors required", cors);
 const app = express();
@@ -23,10 +27,17 @@ const router = express.Router();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express_session({
+    secret: config.SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { httpOnly: false }
+}))
 app.use(passport.initialize());
+app.use(passport.session())
 app.use(history());
 //console.log("use finished");
-mongoose.connect('mongodb://localhost/movie_rating_app', function() {
+mongoose.connect(config.DB, function() {
     console.log("db connected");
 }).catch(err => {
     console.err("App starting err:", err.stack);
@@ -41,6 +52,25 @@ fs.readdirSync('controllers').forEach(function(file) {
 
 })
 app.use(serveStatic(__dirname + "/dist/"))
+router.get('/api/current_user', isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.send({ current_user: req.user })
+    } else {
+        res.status(403).send({ success: false, msg: 'Unauthorized.' })
+    }
+})
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect('/');
+    console.log("in server.js isLoggedIn: error auth failed")
+}
+router.get('/api/logout', (req, res) => {
+    req.logout();
+    res.send();
+})
 router.get('/', function(req, res) {
         res.json({
             message: 'API INIT'
