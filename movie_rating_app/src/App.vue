@@ -47,7 +47,7 @@
 </template>
 <script>
 import './assets/stylesheets/main.css';
-import bus from 'bus.js';
+import bus from './bus.js';
 import Axios from 'axios';
 export default {
   
@@ -73,15 +73,16 @@ export default {
         method:'get',
         url:'/api/current_user',
       })
-      .thsn((response)=>{
+      .then((response)=>{
         this.current_user = response.data.current_user;
+        this.$router.push({name:'Home'});
       })
       .catch((e)=>{
         console.log("in app.vue,fetchUser,e:",e);
       })
     },
     logout(){
-      return axios({
+      return Axios({
         method:'get',
         url:'/api/logout',
       })

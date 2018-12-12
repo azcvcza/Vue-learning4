@@ -15,10 +15,12 @@ module.exports.controller = (app) => {
         passwordField: 'password',
     }, (email, password, done) => {
         User.getUserByEmail(email, (err, user) => {
+            console.log("in user.js,user,err", user, err);
             if (err) { return done(err) }
             if (!user) { return done(null, false) }
             User.comparePassword(password, user.password, (error, isMatch) => {
                 if (isMatch) {
+                    console.log("comparePassword:ismatch:", isMatch, user)
                     return done(null, user);
                 }
                 return done(null, false);
@@ -27,8 +29,9 @@ module.exports.controller = (app) => {
         })
     }));
     //login a user
-    app.post('users/login', passport.authenticate('local', { failureRedirect: '/users/login' }),
+    app.post('/users/login', passport.authenticate('local', { failureRedirect: '/users/login' }),
         (req, res) => {
+            console.log("in user controller login req,res ", req, res);
             res.redirect('/');
         }
     )

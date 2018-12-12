@@ -30,7 +30,7 @@ export default {
 					email:this.email,
 					password:this.password,
 				},
-				url:'/users/login',
+				url:`/users/login`,
 				headers:{
 					'Content-Type':'application/json',
 				}
