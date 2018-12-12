@@ -15,6 +15,8 @@ jwtOptions.jwtFromRequest = extractJWT.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'movieratingapplicationsecretkey';
 //
 const serveStatic = require('serve-static');
+//
+const history = require('connect-history-api-fallback');
 //console.log("cors required", cors);
 const app = express();
 const router = express.Router();
@@ -22,6 +24,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
+app.use(history());
 //console.log("use finished");
 mongoose.connect('mongodb://localhost/movie_rating_app', function() {
     console.log("db connected");
