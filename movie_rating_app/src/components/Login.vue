@@ -11,6 +11,7 @@
 </template>
 <script>
 import axios from 'axios';
+import bus from '../bus.js';
 export default {
 	data:()=>({
 		valid:true,
@@ -37,7 +38,8 @@ export default {
 			.then((response)=>{
 				window.localStorage.setItem('auth',response.data.token);
 				this.$swal('great','you are ready to start!','success');
-				this.$router.push({name:'Home'})
+				bus.$emit('refreshUser');
+				//this.$router.push({name:'Home'})
 			})
 			.catch((error)=>{
 				const msg = error;
