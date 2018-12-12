@@ -50,7 +50,7 @@
 			async fetchMovies() {
 				return axios({
 					method: "get",
-					url: "http://localhost:8081/movies",
+					url: "/movies",
 					headers: {
 						"Access-Control-Allow-Origin": "*"
 					}
