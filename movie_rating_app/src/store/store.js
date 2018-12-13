@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
                     url: '/movies',
                 })
                 .then((response) => {
+                    console.log("response in store.js", response)
                     context.commit("MOVIES", response.data.movies);
                 })
                 .catch((e) => {
@@ -21,6 +22,7 @@ export const store = new Vuex.Store({
                 })
         },
         addMovie: (context, payload) => {
+            console.log(this.$swal)
             return axios({
                 method: 'post',
                 data: payload,
@@ -28,14 +30,14 @@ export const store = new Vuex.Store({
                 headers: {
                     'Content-Type': 'application/json',
                 }
-            }).then(() => {
+            }).then((response) => {
+                context.commit("ADD_MOVIE", response.data);
                 this.$swal(
                     'great!',
                     'movie added successfully',
                     'success',
                 )
-                this.$router.push({ name: 'Home' });
-                this.$refs.form.reset();
+
             }).catch((e) => {
                 console.log("error in addmovie submit:", e);
                 this.$swal(
@@ -49,13 +51,18 @@ export const store = new Vuex.Store({
     },
     mutations: {
         MOVIES: (state, payload) => {
+            console.log("get movies", state.movies, payload)
             state.movies = payload
         },
         ADD_MOVIE: (state, payload) => {
+            console.log("add,movies", state.movies)
             state.movies.unshift(payload);
         }
     },
     getters: {
-        fetchMovies: state => state.movies,
+        fetchMovies: state => {
+            console.log("geeters", state.movies)
+            return state.movies;
+        }
     }
 })

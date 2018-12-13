@@ -37,32 +37,10 @@
 	import axios from "axios";
 	export default {
 		name: "Movies",
-		data() {
-			return {
-				message: "Hello there,fuck you",
-				movies: []
-			};
-		},
 		methods: {
 			reply() {
 				this.message = "I'm doing great, thank you!";
 			},
-			async fetchMovies() {
-				return axios({
-					method: "get",
-					url: "/movies",
-					headers: {
-						"Access-Control-Allow-Origin": "*"
-					}
-				})
-					.then(response => {
-						console.log("response in fetch:", response);
-						this.movies = response.data.movies;
-					})
-					.catch(e => {
-						console.log("error in fetch", JSON.stringify(e));
-					});
-			}
 		},
 		computed:{
 			movies(){
