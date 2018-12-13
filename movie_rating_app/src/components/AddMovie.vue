@@ -25,36 +25,17 @@ export default {
 	}),
 	methods:{
 		submit(){
-			
 			if(this.$refs.form.validate()){
-			return axios({
-				method:'post',
-				data:{
+				const movie = {
 					name:this.name,
 					description:this.description,
 					release_year:this.release_year,
 					genre:this.genre,
-				},
-				url:'/movies',
-				headers:{
-					'Content-Type':'application/json',
 				}
-			}).then(()=>{
-				this.$swal(
-					'great!',
-					'movie added successfully',
-					'success',
-				)
-				this.$router.push({name:'Home'});
+				this.$store.dispatch("addMovie",movie);
 				this.$refs.form.reset();
-			}).catch((e)=>{
-				console.log("error in addmovie submit:",e);
-				this.$swal(
-					'oh oo!',
-					'could not add the movie',
-					'error',
-				)
-			})
+				this.$router.push({name:'Home'});
+				
 			}
 			return true;
 		},

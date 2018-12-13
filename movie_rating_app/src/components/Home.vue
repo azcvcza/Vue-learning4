@@ -64,8 +64,13 @@
 					});
 			}
 		},
+		computed:{
+			movies(){
+				return this.$store.getters.fetchMovies
+			}
+		},
 		mounted() {
-			this.fetchMovies();
+			this.$store.dispatch("fetchMovies");
 		}
 	};
 </script>
