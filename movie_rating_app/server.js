@@ -82,4 +82,4 @@ app.use('/', router);
 app.listen(port, function() {
     console.log('api running on port ${port}', port)
 })
-module.express = app.listen(3000);
+module.express = server
